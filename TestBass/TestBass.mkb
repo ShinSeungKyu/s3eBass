@@ -1,0 +1,42 @@
+#!/usr/bin/env mkb
+options
+{
+    module_path="../PfGame"
+    module_path="../s3eBass"
+}
+
+subprojects
+{
+    s3eBass
+    PfGame
+}
+
+includepath
+{
+    source
+}
+
+files
+{
+    (source)
+    TestBass.cpp
+
+    [source]
+    (source)
+    Game.h
+    Game.cpp
+}
+
+assets
+{
+    (data)
+    audio
+
+    (data-ram/data-gles1)
+}
+
+deployments
+{
+	["Default"]
+	iphone-appid='com.pettyfun.TestBass'
+}

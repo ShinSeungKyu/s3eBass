@@ -1,0 +1,2 @@
+jar -cf bassloader.jar com/pettyfun/BassLoader.class
+mv bassloader.jar ../android/

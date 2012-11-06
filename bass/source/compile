@@ -1,0 +1,1 @@
+javac com/pettyfun/BassLoader.java -cp .:/Developer/Marmalade/6.1/s3e/loader/android/s3e_release.jar:/Developer/Marmalade/6.1/s3e/deploy/plugins/android/android.jar
