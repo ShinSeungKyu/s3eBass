@@ -10,6 +10,7 @@
  * to nothing if this extension is not enabled in the loader
  * at build time.
  */
+#include "IwDebug.h"
 #include "s3eBass_autodefs.h"
 #include "s3eEdk.h"
 #include "s3eBass.h"
@@ -17,6 +18,672 @@
 extern s3eResult s3eBassInit();
 extern void s3eBassTerminate();
 
+
+// On platforms that use a seperate UI/OS thread we can autowrap functions
+// here.   Note that we can't use the S3E_USE_OS_THREAD define since this
+// code is oftern build standalone, outside the main loader build.
+#if defined I3D_OS_IPHONE || defined I3D_OS_OSX || defined I3D_OS_LINUX || defined I3D_OS_WINDOWS
+
+static BOOL s3eBASS_SetConfig_wrap(DWORD option, DWORD value)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_SetConfig"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_SetConfig, 2, option, value);
+}
+
+static DWORD s3eBASS_GetConfig_wrap(DWORD option)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_GetConfig"));
+    return (DWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_GetConfig, 1, option);
+}
+
+static BOOL s3eBASS_SetConfigPtr_wrap(DWORD option, void* value)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_SetConfigPtr"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_SetConfigPtr, 2, option, value);
+}
+
+static void* s3eBASS_GetConfigPtr_wrap(DWORD option)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_GetConfigPtr"));
+    return (void*)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_GetConfigPtr, 1, option);
+}
+
+static DWORD s3eBASS_GetVersion_wrap()
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_GetVersion"));
+    return (DWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_GetVersion, 0);
+}
+
+static int s3eBASS_ErrorGetCode_wrap()
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ErrorGetCode"));
+    return (int)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ErrorGetCode, 0);
+}
+
+static BOOL s3eBASS_GetDeviceInfo_wrap(DWORD device, BASS_DEVICEINFO* info)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_GetDeviceInfo"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_GetDeviceInfo, 2, device, info);
+}
+
+static BOOL s3eBASS_Init_wrap(int device, DWORD freq, DWORD flags, void* win, void* dsguid)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_Init"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_Init, 5, device, freq, flags, win, dsguid);
+}
+
+static BOOL s3eBASS_SetDevice_wrap(DWORD device)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_SetDevice"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_SetDevice, 1, device);
+}
+
+static DWORD s3eBASS_GetDevice_wrap()
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_GetDevice"));
+    return (DWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_GetDevice, 0);
+}
+
+static BOOL s3eBASS_Free_wrap()
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_Free"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_Free, 0);
+}
+
+static BOOL s3eBASS_GetInfo_wrap(BASS_INFO* info)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_GetInfo"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_GetInfo, 1, info);
+}
+
+static BOOL s3eBASS_Update_wrap(DWORD length)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_Update"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_Update, 1, length);
+}
+
+static float s3eBASS_GetCPU_wrap()
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_GetCPU"));
+    return (float)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_GetCPU, 0);
+}
+
+static BOOL s3eBASS_Start_wrap()
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_Start"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_Start, 0);
+}
+
+static BOOL s3eBASS_Stop_wrap()
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_Stop"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_Stop, 0);
+}
+
+static BOOL s3eBASS_Pause_wrap()
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_Pause"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_Pause, 0);
+}
+
+static BOOL s3eBASS_SetVolume_wrap(float volume)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_SetVolume"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_SetVolume, 1, volume);
+}
+
+static float s3eBASS_GetVolume_wrap()
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_GetVolume"));
+    return (float)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_GetVolume, 0);
+}
+
+static HPLUGIN s3eBASS_PluginLoad_wrap(const char* file, DWORD flags)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_PluginLoad"));
+    return (HPLUGIN)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_PluginLoad, 2, file, flags);
+}
+
+static BOOL s3eBASS_PluginFree_wrap(HPLUGIN handle)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_PluginFree"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_PluginFree, 1, handle);
+}
+
+static const BASS_PLUGININFO* s3eBASS_PluginGetInfo_wrap(HPLUGIN handle)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_PluginGetInfo"));
+    return (const BASS_PLUGININFO*)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_PluginGetInfo, 1, handle);
+}
+
+static BOOL s3eBASS_Set3DFactors_wrap(float distf, float rollf, float doppf)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_Set3DFactors"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_Set3DFactors, 3, distf, rollf, doppf);
+}
+
+static BOOL s3eBASS_Get3DFactors_wrap(float* distf, float* rollf, float* doppf)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_Get3DFactors"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_Get3DFactors, 3, distf, rollf, doppf);
+}
+
+static BOOL s3eBASS_Set3DPosition_wrap(const BASS_3DVECTOR* pos, const BASS_3DVECTOR* vel, const BASS_3DVECTOR* front, const BASS_3DVECTOR* top)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_Set3DPosition"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_Set3DPosition, 4, pos, vel, front, top);
+}
+
+static BOOL s3eBASS_Get3DPosition_wrap(BASS_3DVECTOR* pos, BASS_3DVECTOR* vel, BASS_3DVECTOR* front, BASS_3DVECTOR* top)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_Get3DPosition"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_Get3DPosition, 4, pos, vel, front, top);
+}
+
+static void s3eBASS_Apply3D_wrap()
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_Apply3D"));
+    s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_Apply3D, 0);
+}
+
+static HMUSIC s3eBASS_MusicLoad_wrap(BOOL mem, const void* file, QWORD offset, DWORD length, DWORD flags, DWORD freq)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_MusicLoad"));
+    return (HMUSIC)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_MusicLoad, 6, mem, file, offset, length, flags, freq);
+}
+
+static BOOL s3eBASS_MusicFree_wrap(HMUSIC handle)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_MusicFree"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_MusicFree, 1, handle);
+}
+
+static HSAMPLE s3eBASS_SampleLoad_wrap(BOOL mem, const void* file, QWORD offset, DWORD length, DWORD max, DWORD flags)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_SampleLoad"));
+    return (HSAMPLE)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_SampleLoad, 6, mem, file, offset, length, max, flags);
+}
+
+static HSAMPLE s3eBASS_SampleCreate_wrap(DWORD length, DWORD freq, DWORD chans, DWORD max, DWORD flags)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_SampleCreate"));
+    return (HSAMPLE)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_SampleCreate, 5, length, freq, chans, max, flags);
+}
+
+static BOOL s3eBASS_SampleFree_wrap(HSAMPLE handle)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_SampleFree"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_SampleFree, 1, handle);
+}
+
+static BOOL s3eBASS_SampleSetData_wrap(HSAMPLE handle, const void* buffer)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_SampleSetData"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_SampleSetData, 2, handle, buffer);
+}
+
+static BOOL s3eBASS_SampleGetData_wrap(HSAMPLE handle, void* buffer)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_SampleGetData"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_SampleGetData, 2, handle, buffer);
+}
+
+static BOOL s3eBASS_SampleGetInfo_wrap(HSAMPLE handle, BASS_SAMPLE* info)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_SampleGetInfo"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_SampleGetInfo, 2, handle, info);
+}
+
+static BOOL s3eBASS_SampleSetInfo_wrap(HSAMPLE handle, const BASS_SAMPLE* info)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_SampleSetInfo"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_SampleSetInfo, 2, handle, info);
+}
+
+static HCHANNEL s3eBASS_SampleGetChannel_wrap(HSAMPLE handle, BOOL onlynew)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_SampleGetChannel"));
+    return (HCHANNEL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_SampleGetChannel, 2, handle, onlynew);
+}
+
+static DWORD s3eBASS_SampleGetChannels_wrap(HSAMPLE handle, HCHANNEL* channels)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_SampleGetChannels"));
+    return (DWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_SampleGetChannels, 2, handle, channels);
+}
+
+static BOOL s3eBASS_SampleStop_wrap(HSAMPLE handle)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_SampleStop"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_SampleStop, 1, handle);
+}
+
+static HSTREAM s3eBASS_StreamCreate_wrap(DWORD freq, DWORD chans, DWORD flags, STREAMPROC* proc, void* user)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_StreamCreate"));
+    return (HSTREAM)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_StreamCreate, 5, freq, chans, flags, proc, user);
+}
+
+static HSTREAM s3eBASS_StreamCreateFile_wrap(BOOL mem, const void* file, QWORD offset, QWORD length, DWORD flags)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_StreamCreateFile"));
+    return (HSTREAM)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_StreamCreateFile, 5, mem, file, offset, length, flags);
+}
+
+static HSTREAM s3eBASS_StreamCreateURL_wrap(const char* url, DWORD offset, DWORD flags, DOWNLOADPROC* proc, void* user)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_StreamCreateURL"));
+    return (HSTREAM)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_StreamCreateURL, 5, url, offset, flags, proc, user);
+}
+
+static HSTREAM s3eBASS_StreamCreateFileUser_wrap(DWORD system, DWORD flags, const BASS_FILEPROCS* proc, void* user)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_StreamCreateFileUser"));
+    return (HSTREAM)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_StreamCreateFileUser, 4, system, flags, proc, user);
+}
+
+static BOOL s3eBASS_StreamFree_wrap(HSTREAM handle)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_StreamFree"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_StreamFree, 1, handle);
+}
+
+static QWORD s3eBASS_StreamGetFilePosition_wrap(HSTREAM handle, DWORD mode)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_StreamGetFilePosition"));
+    return (QWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_StreamGetFilePosition, 2, handle, mode);
+}
+
+static DWORD s3eBASS_StreamPutData_wrap(HSTREAM handle, const void* buffer, DWORD length)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_StreamPutData"));
+    return (DWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_StreamPutData, 3, handle, buffer, length);
+}
+
+static DWORD s3eBASS_StreamPutFileData_wrap(HSTREAM handle, const void* buffer, DWORD length)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_StreamPutFileData"));
+    return (DWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_StreamPutFileData, 3, handle, buffer, length);
+}
+
+static BOOL s3eBASS_RecordGetDeviceInfo_wrap(DWORD device, BASS_DEVICEINFO* info)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_RecordGetDeviceInfo"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_RecordGetDeviceInfo, 2, device, info);
+}
+
+static BOOL s3eBASS_RecordInit_wrap(int device)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_RecordInit"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_RecordInit, 1, device);
+}
+
+static BOOL s3eBASS_RecordSetDevice_wrap(DWORD device)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_RecordSetDevice"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_RecordSetDevice, 1, device);
+}
+
+static DWORD s3eBASS_RecordGetDevice_wrap()
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_RecordGetDevice"));
+    return (DWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_RecordGetDevice, 0);
+}
+
+static BOOL s3eBASS_RecordFree_wrap()
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_RecordFree"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_RecordFree, 0);
+}
+
+static BOOL s3eBASS_RecordGetInfo_wrap(BASS_RECORDINFO* info)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_RecordGetInfo"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_RecordGetInfo, 1, info);
+}
+
+static const char* s3eBASS_RecordGetInputName_wrap(int input)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_RecordGetInputName"));
+    return (const char*)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_RecordGetInputName, 1, input);
+}
+
+static BOOL s3eBASS_RecordSetInput_wrap(int input, DWORD flags, float volume)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_RecordSetInput"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_RecordSetInput, 3, input, flags, volume);
+}
+
+static DWORD s3eBASS_RecordGetInput_wrap(int input, float* volume)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_RecordGetInput"));
+    return (DWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_RecordGetInput, 2, input, volume);
+}
+
+static HRECORD s3eBASS_RecordStart_wrap(DWORD freq, DWORD chans, DWORD flags, RECORDPROC* proc, void* user)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_RecordStart"));
+    return (HRECORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_RecordStart, 5, freq, chans, flags, proc, user);
+}
+
+static double s3eBASS_ChannelBytes2Seconds_wrap(DWORD handle, QWORD pos)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelBytes2Seconds"));
+    return (double)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelBytes2Seconds, 2, handle, pos);
+}
+
+static QWORD s3eBASS_ChannelSeconds2Bytes_wrap(DWORD handle, double pos)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelSeconds2Bytes"));
+    return (QWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelSeconds2Bytes, 2, handle, pos);
+}
+
+static DWORD s3eBASS_ChannelGetDevice_wrap(DWORD handle)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelGetDevice"));
+    return (DWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelGetDevice, 1, handle);
+}
+
+static BOOL s3eBASS_ChannelSetDevice_wrap(DWORD handle, DWORD device)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelSetDevice"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelSetDevice, 2, handle, device);
+}
+
+static DWORD s3eBASS_ChannelIsActive_wrap(DWORD handle)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelIsActive"));
+    return (DWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelIsActive, 1, handle);
+}
+
+static BOOL s3eBASS_ChannelGetInfo_wrap(DWORD handle, BASS_CHANNELINFO* info)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelGetInfo"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelGetInfo, 2, handle, info);
+}
+
+static const char* s3eBASS_ChannelGetTags_wrap(DWORD handle, DWORD tags)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelGetTags"));
+    return (const char*)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelGetTags, 2, handle, tags);
+}
+
+static DWORD s3eBASS_ChannelFlags_wrap(DWORD handle, DWORD flags, DWORD mask)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelFlags"));
+    return (DWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelFlags, 3, handle, flags, mask);
+}
+
+static BOOL s3eBASS_ChannelUpdate_wrap(DWORD handle, DWORD length)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelUpdate"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelUpdate, 2, handle, length);
+}
+
+static BOOL s3eBASS_ChannelLock_wrap(DWORD handle, BOOL lock)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelLock"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelLock, 2, handle, lock);
+}
+
+static BOOL s3eBASS_ChannelPlay_wrap(DWORD handle, BOOL restart)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelPlay"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelPlay, 2, handle, restart);
+}
+
+static BOOL s3eBASS_ChannelStop_wrap(DWORD handle)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelStop"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelStop, 1, handle);
+}
+
+static BOOL s3eBASS_ChannelPause_wrap(DWORD handle)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelPause"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelPause, 1, handle);
+}
+
+static BOOL s3eBASS_ChannelSetAttribute_wrap(DWORD handle, DWORD attrib, float value)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelSetAttribute"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelSetAttribute, 3, handle, attrib, value);
+}
+
+static BOOL s3eBASS_ChannelGetAttribute_wrap(DWORD handle, DWORD attrib, float* value)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelGetAttribute"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelGetAttribute, 3, handle, attrib, value);
+}
+
+static BOOL s3eBASS_ChannelSlideAttribute_wrap(DWORD handle, DWORD attrib, float value, DWORD time)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelSlideAttribute"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelSlideAttribute, 4, handle, attrib, value, time);
+}
+
+static BOOL s3eBASS_ChannelIsSliding_wrap(DWORD handle, DWORD attrib)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelIsSliding"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelIsSliding, 2, handle, attrib);
+}
+
+static BOOL s3eBASS_ChannelSet3DAttributes_wrap(DWORD handle, int mode, float min, float max, int iangle, int oangle, float outvol)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelSet3DAttributes"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelSet3DAttributes, 7, handle, mode, min, max, iangle, oangle, outvol);
+}
+
+static BOOL s3eBASS_ChannelGet3DAttributes_wrap(DWORD handle, DWORD* mode, float* min, float* max, DWORD* iangle, DWORD* oangle, float* outvol)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelGet3DAttributes"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelGet3DAttributes, 7, handle, mode, min, max, iangle, oangle, outvol);
+}
+
+static BOOL s3eBASS_ChannelSet3DPosition_wrap(DWORD handle, const BASS_3DVECTOR* pos, const BASS_3DVECTOR* orient, const BASS_3DVECTOR* vel)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelSet3DPosition"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelSet3DPosition, 4, handle, pos, orient, vel);
+}
+
+static BOOL s3eBASS_ChannelGet3DPosition_wrap(DWORD handle, BASS_3DVECTOR* pos, BASS_3DVECTOR* orient, BASS_3DVECTOR* vel)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelGet3DPosition"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelGet3DPosition, 4, handle, pos, orient, vel);
+}
+
+static QWORD s3eBASS_ChannelGetLength_wrap(DWORD handle, DWORD mode)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelGetLength"));
+    return (QWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelGetLength, 2, handle, mode);
+}
+
+static BOOL s3eBASS_ChannelSetPosition_wrap(DWORD handle, QWORD pos, DWORD mode)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelSetPosition"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelSetPosition, 3, handle, pos, mode);
+}
+
+static QWORD s3eBASS_ChannelGetPosition_wrap(DWORD handle, DWORD mode)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelGetPosition"));
+    return (QWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelGetPosition, 2, handle, mode);
+}
+
+static DWORD s3eBASS_ChannelGetLevel_wrap(DWORD handle)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelGetLevel"));
+    return (DWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelGetLevel, 1, handle);
+}
+
+static DWORD s3eBASS_ChannelGetData_wrap(DWORD handle, void* buffer, DWORD length)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelGetData"));
+    return (DWORD)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelGetData, 3, handle, buffer, length);
+}
+
+static HSYNC s3eBASS_ChannelSetSync_wrap(DWORD handle, DWORD type, QWORD param, SYNCPROC* proc, void* user)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelSetSync"));
+    return (HSYNC)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelSetSync, 5, handle, type, param, proc, user);
+}
+
+static BOOL s3eBASS_ChannelRemoveSync_wrap(DWORD handle, HSYNC sync)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelRemoveSync"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelRemoveSync, 2, handle, sync);
+}
+
+static HDSP s3eBASS_ChannelSetDSP_wrap(DWORD handle, DSPPROC* proc, void* user, int priority)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelSetDSP"));
+    return (HDSP)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelSetDSP, 4, handle, proc, user, priority);
+}
+
+static BOOL s3eBASS_ChannelRemoveDSP_wrap(DWORD handle, HDSP dsp)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelRemoveDSP"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelRemoveDSP, 2, handle, dsp);
+}
+
+static BOOL s3eBASS_ChannelSetLink_wrap(DWORD handle, DWORD chan)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelSetLink"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelSetLink, 2, handle, chan);
+}
+
+static BOOL s3eBASS_ChannelRemoveLink_wrap(DWORD handle, DWORD chan)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelRemoveLink"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelRemoveLink, 2, handle, chan);
+}
+
+static HFX s3eBASS_ChannelSetFX_wrap(DWORD handle, DWORD type, int priority)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelSetFX"));
+    return (HFX)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelSetFX, 3, handle, type, priority);
+}
+
+static BOOL s3eBASS_ChannelRemoveFX_wrap(DWORD handle, HFX fx)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_ChannelRemoveFX"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_ChannelRemoveFX, 2, handle, fx);
+}
+
+static BOOL s3eBASS_FXSetParameters_wrap(HFX handle, const void* params)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_FXSetParameters"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_FXSetParameters, 2, handle, params);
+}
+
+static BOOL s3eBASS_FXGetParameters_wrap(HFX handle, void* params)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_FXGetParameters"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_FXGetParameters, 2, handle, params);
+}
+
+static BOOL s3eBASS_FXReset_wrap(HFX handle)
+{
+    IwTrace(BASS_VERBOSE, ("calling s3eBass func on main thread: s3eBASS_FXReset"));
+    return (BOOL)(intptr_t)s3eEdkThreadRunOnOS((s3eEdkThreadFunc)s3eBASS_FXReset, 1, handle);
+}
+
+#define s3eBASS_SetConfig s3eBASS_SetConfig_wrap
+#define s3eBASS_GetConfig s3eBASS_GetConfig_wrap
+#define s3eBASS_SetConfigPtr s3eBASS_SetConfigPtr_wrap
+#define s3eBASS_GetConfigPtr s3eBASS_GetConfigPtr_wrap
+#define s3eBASS_GetVersion s3eBASS_GetVersion_wrap
+#define s3eBASS_ErrorGetCode s3eBASS_ErrorGetCode_wrap
+#define s3eBASS_GetDeviceInfo s3eBASS_GetDeviceInfo_wrap
+#define s3eBASS_Init s3eBASS_Init_wrap
+#define s3eBASS_SetDevice s3eBASS_SetDevice_wrap
+#define s3eBASS_GetDevice s3eBASS_GetDevice_wrap
+#define s3eBASS_Free s3eBASS_Free_wrap
+#define s3eBASS_GetInfo s3eBASS_GetInfo_wrap
+#define s3eBASS_Update s3eBASS_Update_wrap
+#define s3eBASS_GetCPU s3eBASS_GetCPU_wrap
+#define s3eBASS_Start s3eBASS_Start_wrap
+#define s3eBASS_Stop s3eBASS_Stop_wrap
+#define s3eBASS_Pause s3eBASS_Pause_wrap
+#define s3eBASS_SetVolume s3eBASS_SetVolume_wrap
+#define s3eBASS_GetVolume s3eBASS_GetVolume_wrap
+#define s3eBASS_PluginLoad s3eBASS_PluginLoad_wrap
+#define s3eBASS_PluginFree s3eBASS_PluginFree_wrap
+#define s3eBASS_PluginGetInfo s3eBASS_PluginGetInfo_wrap
+#define s3eBASS_Set3DFactors s3eBASS_Set3DFactors_wrap
+#define s3eBASS_Get3DFactors s3eBASS_Get3DFactors_wrap
+#define s3eBASS_Set3DPosition s3eBASS_Set3DPosition_wrap
+#define s3eBASS_Get3DPosition s3eBASS_Get3DPosition_wrap
+#define s3eBASS_Apply3D s3eBASS_Apply3D_wrap
+#define s3eBASS_MusicLoad s3eBASS_MusicLoad_wrap
+#define s3eBASS_MusicFree s3eBASS_MusicFree_wrap
+#define s3eBASS_SampleLoad s3eBASS_SampleLoad_wrap
+#define s3eBASS_SampleCreate s3eBASS_SampleCreate_wrap
+#define s3eBASS_SampleFree s3eBASS_SampleFree_wrap
+#define s3eBASS_SampleSetData s3eBASS_SampleSetData_wrap
+#define s3eBASS_SampleGetData s3eBASS_SampleGetData_wrap
+#define s3eBASS_SampleGetInfo s3eBASS_SampleGetInfo_wrap
+#define s3eBASS_SampleSetInfo s3eBASS_SampleSetInfo_wrap
+#define s3eBASS_SampleGetChannel s3eBASS_SampleGetChannel_wrap
+#define s3eBASS_SampleGetChannels s3eBASS_SampleGetChannels_wrap
+#define s3eBASS_SampleStop s3eBASS_SampleStop_wrap
+#define s3eBASS_StreamCreate s3eBASS_StreamCreate_wrap
+#define s3eBASS_StreamCreateFile s3eBASS_StreamCreateFile_wrap
+#define s3eBASS_StreamCreateURL s3eBASS_StreamCreateURL_wrap
+#define s3eBASS_StreamCreateFileUser s3eBASS_StreamCreateFileUser_wrap
+#define s3eBASS_StreamFree s3eBASS_StreamFree_wrap
+#define s3eBASS_StreamGetFilePosition s3eBASS_StreamGetFilePosition_wrap
+#define s3eBASS_StreamPutData s3eBASS_StreamPutData_wrap
+#define s3eBASS_StreamPutFileData s3eBASS_StreamPutFileData_wrap
+#define s3eBASS_RecordGetDeviceInfo s3eBASS_RecordGetDeviceInfo_wrap
+#define s3eBASS_RecordInit s3eBASS_RecordInit_wrap
+#define s3eBASS_RecordSetDevice s3eBASS_RecordSetDevice_wrap
+#define s3eBASS_RecordGetDevice s3eBASS_RecordGetDevice_wrap
+#define s3eBASS_RecordFree s3eBASS_RecordFree_wrap
+#define s3eBASS_RecordGetInfo s3eBASS_RecordGetInfo_wrap
+#define s3eBASS_RecordGetInputName s3eBASS_RecordGetInputName_wrap
+#define s3eBASS_RecordSetInput s3eBASS_RecordSetInput_wrap
+#define s3eBASS_RecordGetInput s3eBASS_RecordGetInput_wrap
+#define s3eBASS_RecordStart s3eBASS_RecordStart_wrap
+#define s3eBASS_ChannelBytes2Seconds s3eBASS_ChannelBytes2Seconds_wrap
+#define s3eBASS_ChannelSeconds2Bytes s3eBASS_ChannelSeconds2Bytes_wrap
+#define s3eBASS_ChannelGetDevice s3eBASS_ChannelGetDevice_wrap
+#define s3eBASS_ChannelSetDevice s3eBASS_ChannelSetDevice_wrap
+#define s3eBASS_ChannelIsActive s3eBASS_ChannelIsActive_wrap
+#define s3eBASS_ChannelGetInfo s3eBASS_ChannelGetInfo_wrap
+#define s3eBASS_ChannelGetTags s3eBASS_ChannelGetTags_wrap
+#define s3eBASS_ChannelFlags s3eBASS_ChannelFlags_wrap
+#define s3eBASS_ChannelUpdate s3eBASS_ChannelUpdate_wrap
+#define s3eBASS_ChannelLock s3eBASS_ChannelLock_wrap
+#define s3eBASS_ChannelPlay s3eBASS_ChannelPlay_wrap
+#define s3eBASS_ChannelStop s3eBASS_ChannelStop_wrap
+#define s3eBASS_ChannelPause s3eBASS_ChannelPause_wrap
+#define s3eBASS_ChannelSetAttribute s3eBASS_ChannelSetAttribute_wrap
+#define s3eBASS_ChannelGetAttribute s3eBASS_ChannelGetAttribute_wrap
+#define s3eBASS_ChannelSlideAttribute s3eBASS_ChannelSlideAttribute_wrap
+#define s3eBASS_ChannelIsSliding s3eBASS_ChannelIsSliding_wrap
+#define s3eBASS_ChannelSet3DAttributes s3eBASS_ChannelSet3DAttributes_wrap
+#define s3eBASS_ChannelGet3DAttributes s3eBASS_ChannelGet3DAttributes_wrap
+#define s3eBASS_ChannelSet3DPosition s3eBASS_ChannelSet3DPosition_wrap
+#define s3eBASS_ChannelGet3DPosition s3eBASS_ChannelGet3DPosition_wrap
+#define s3eBASS_ChannelGetLength s3eBASS_ChannelGetLength_wrap
+#define s3eBASS_ChannelSetPosition s3eBASS_ChannelSetPosition_wrap
+#define s3eBASS_ChannelGetPosition s3eBASS_ChannelGetPosition_wrap
+#define s3eBASS_ChannelGetLevel s3eBASS_ChannelGetLevel_wrap
+#define s3eBASS_ChannelGetData s3eBASS_ChannelGetData_wrap
+#define s3eBASS_ChannelSetSync s3eBASS_ChannelSetSync_wrap
+#define s3eBASS_ChannelRemoveSync s3eBASS_ChannelRemoveSync_wrap
+#define s3eBASS_ChannelSetDSP s3eBASS_ChannelSetDSP_wrap
+#define s3eBASS_ChannelRemoveDSP s3eBASS_ChannelRemoveDSP_wrap
+#define s3eBASS_ChannelSetLink s3eBASS_ChannelSetLink_wrap
+#define s3eBASS_ChannelRemoveLink s3eBASS_ChannelRemoveLink_wrap
+#define s3eBASS_ChannelSetFX s3eBASS_ChannelSetFX_wrap
+#define s3eBASS_ChannelRemoveFX s3eBASS_ChannelRemoveFX_wrap
+#define s3eBASS_FXSetParameters s3eBASS_FXSetParameters_wrap
+#define s3eBASS_FXGetParameters s3eBASS_FXGetParameters_wrap
+#define s3eBASS_FXReset s3eBASS_FXReset_wrap
+
+#endif
 
 void s3eBassRegisterExt()
 {
@@ -43,7 +710,7 @@ void s3eBassRegisterExt()
     funcPtrs[18] = (void*)s3eBASS_GetVolume;
     funcPtrs[19] = (void*)s3eBASS_PluginLoad;
     funcPtrs[20] = (void*)s3eBASS_PluginFree;
-    funcPtrs[21] = (void*)*s3eBASS_PluginGetInfo;
+    funcPtrs[21] = (void*)s3eBASS_PluginGetInfo;
     funcPtrs[22] = (void*)s3eBASS_Set3DFactors;
     funcPtrs[23] = (void*)s3eBASS_Get3DFactors;
     funcPtrs[24] = (void*)s3eBASS_Set3DPosition;

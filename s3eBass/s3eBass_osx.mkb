@@ -6,10 +6,6 @@ options
 {
     dll
     x86
-}
-
-options
-{
     output-name="lib/osx/libs3eBass.dylib"
     output-name-debug="lib/osx/libs3eBass_d.dylib"
 }

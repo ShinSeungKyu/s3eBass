@@ -1,14 +1,20 @@
+Archive member included because of file (symbol)
+
+/Developer/Marmalade/6.2/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+                              release/s3eBass_register.os (s3eEdkThreadRunOnOS)
 
 Discarded input sections
 
  .note.GNU-stack
-                0x00000000        0x0 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+                0x00000000        0x0 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
  .note.GNU-stack
                 0x00000000        0x0 release/s3eBass.os
  .note.GNU-stack
                 0x00000000        0x0 release/s3eBass_register.os
  .note.GNU-stack
-                0x00000000        0x0 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtend_so.o
+                0x00000000        0x0 /Developer/Marmalade/6.2/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+ .note.GNU-stack
+                0x00000000        0x0 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtend_so.o
 
 Memory Configuration
 
@@ -17,75 +23,73 @@ Name             Origin             Length             Attributes
 
 Linker script and memory map
 
-LOAD /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+LOAD /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
 LOAD release/s3eBass.os
 LOAD release/s3eBass_register.os
-LOAD /Users/yjpark/pettyfun/libs/bass/android/armeabi/libbass.so
-LOAD /Developer/Marmalade/6.1/s3e/edk/lib/android/libedk.a
-LOAD /Developer/Marmalade/6.1/s3e/edk/lib/android/libplaceholderplaceholderplaceholderplaceholderplaceholder.so
-LOAD /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/liblog.so
-LOAD /Users/yjpark/App/android-ndk-r8b/sources/cxx-stl/gnu-libstdc++/4.4.3/libs/armeabi/libgnustl_static.a
-LOAD /Users/yjpark/App/android-ndk-r8b/toolchains/arm-linux-androideabi-4.4.3/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.4.3/libgcc.a
-LOAD /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/libstdc++.so
-LOAD /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/libm.so
-LOAD /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/libc.so
-LOAD /Users/yjpark/App/android-ndk-r8b/toolchains/arm-linux-androideabi-4.4.3/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.4.3/libgcc.a
-LOAD /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/libc.so
-LOAD /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/libdl.so
-LOAD /Users/yjpark/App/android-ndk-r8b/toolchains/arm-linux-androideabi-4.4.3/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.4.3/libgcc.a
-LOAD /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtend_so.o
-                0x000000f4                . = (0x0 + SIZEOF_HEADERS)
+LOAD /Users/yjpark/pettyfun/libs/PfAudio/bass/android/armeabi/libbass.so
+LOAD /Developer/Marmalade/6.2/s3e/edk/lib/android/libedk.a
+LOAD /Developer/Marmalade/6.2/s3e/edk/lib/android/libplaceholderplaceholderplaceholderplaceholderplaceholder.so
+LOAD /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/liblog.so
+LOAD /Users/yjpark/App/android-ndk-r8d/sources/cxx-stl/gnu-libstdc++/4.4.3/libs/armeabi/libgnustl_static.a
+LOAD /Users/yjpark/App/android-ndk-r8d/toolchains/arm-linux-androideabi-4.4.3/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.4.3/libgcc.a
+LOAD /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/libstdc++.so
+LOAD /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/libm.so
+LOAD /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/libc.so
+LOAD /Users/yjpark/App/android-ndk-r8d/toolchains/arm-linux-androideabi-4.4.3/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.4.3/libgcc.a
+LOAD /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/libc.so
+LOAD /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/libdl.so
+LOAD /Users/yjpark/App/android-ndk-r8d/toolchains/arm-linux-androideabi-4.4.3/prebuilt/darwin-x86/bin/../lib/gcc/arm-linux-androideabi/4.4.3/libgcc.a
+LOAD /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtend_so.o
+                0x000000d4                . = (0x0 + SIZEOF_HEADERS)
 
 .note.gnu.build-id
  *(.note.gnu.build-id)
 
-.hash           0x000000f4      0x354
+.hash           0x000000d4      0x354
  *(.hash)
- .hash          0x000000f4      0x354 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+ .hash          0x000000d4      0x354 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
 
 .gnu.hash
  *(.gnu.hash)
 
-.dynsym         0x00000448      0x720
+.dynsym         0x00000428      0x720
  *(.dynsym)
- .dynsym        0x00000448      0x720 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+ .dynsym        0x00000428      0x720 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
 
-.dynstr         0x00000b68      0x840
+.dynstr         0x00000b48      0x850
  *(.dynstr)
- .dynstr        0x00000b68      0x840 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+ .dynstr        0x00000b48      0x850 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
 
-.gnu.version    0x000013a8        0x0
+.gnu.version    0x00001398        0x0
  *(.gnu.version)
- .gnu.version   0x00000000        0x0 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+ .gnu.version   0x00000000        0x0 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
 
-.gnu.version_d  0x000013a8        0x0
+.gnu.version_d  0x00001398        0x0
  *(.gnu.version_d)
  .gnu.version_d
-                0x00000000        0x0 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+                0x00000000        0x0 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
 
-.gnu.version_r  0x000013a8        0x0
+.gnu.version_r  0x00001398        0x0
  *(.gnu.version_r)
  .gnu.version_r
-                0x00000000        0x0 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+                0x00000000        0x0 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
 
-.rel.dyn        0x000013a8      0x320
+.rel.dyn        0x00001398      0x308
  *(.rel.init)
  *(.rel.text .rel.text.* .rel.gnu.linkonce.t.*)
- .rel.text      0x000013a8       0x10 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
  *(.rel.fini)
  *(.rel.rodata .rel.rodata.* .rel.gnu.linkonce.r.*)
  *(.rel.data.rel.ro* .rel.gnu.linkonce.d.rel.ro.*)
  *(.rel.data .rel.data.* .rel.gnu.linkonce.d.*)
- .rel.data      0x000013b8        0x8 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
  *(.rel.tdata .rel.tdata.* .rel.gnu.linkonce.td.*)
  *(.rel.tbss .rel.tbss.* .rel.gnu.linkonce.tb.*)
  *(.rel.ctors)
  *(.rel.dtors)
  *(.rel.got)
- .rel.got       0x000013c0      0x300 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+ .rel.got       0x00001398      0x300 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
  *(.rel.bss .rel.bss.* .rel.gnu.linkonce.b.*)
  .rel.fini_array
-                0x000016c0        0x8 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+                0x00001698        0x8 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
 
 .rela.dyn
  *(.rela.init)
@@ -100,9 +104,9 @@ LOAD /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crte
  *(.rela.got)
  *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
 
-.rel.plt        0x000016c8      0x308
+.rel.plt        0x000016a0      0x320
  *(.rel.plt)
- .rel.plt       0x000016c8      0x308 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+ .rel.plt       0x000016a0      0x320 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
 
 .rela.plt
  *(.rela.plt)
@@ -110,115 +114,127 @@ LOAD /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crte
 .init
  *(.init)
 
-.plt            0x000019d0      0x4a0
+.plt            0x000019c0      0x4c4
  *(.plt)
- .plt           0x000019d0      0x4a0 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+ .plt           0x000019c0      0x4c4 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
 
-.text           0x00001e70     0x1524
+.text           0x00001e84     0x2754
  *(.text .stub .text.* .gnu.linkonce.t.*)
- .text          0x00001e70       0x28 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
-                0x00001e80                atexit
- .text          0x00001e98      0x6f4 release/s3eBass.os
-                0x00001f28                s3eBASS_ChannelSetDSP
-                0x00001fd0                s3eBASS_ChannelGet3DPosition
-                0x0000257c                s3eBASS_SetConfig
-                0x00001ee8                s3eBASS_ChannelSetFX
-                0x000024bc                s3eBASS_GetInfo
-                0x000020e0                s3eBASS_ChannelFlags
-                0x0000252c                s3eBASS_ErrorGetCode
-                0x0000255c                s3eBASS_SetConfigPtr
-                0x00001f18                s3eBASS_ChannelRemoveDSP
-                0x00001ff0                s3eBASS_ChannelGet3DAttributes
-                0x0000231c                s3eBASS_SampleGetData
-                0x000022ec                s3eBASS_SampleGetChannel
-                0x000023fc                s3eBASS_Get3DFactors
-                0x000020c0                s3eBASS_ChannelLock
-                0x00001eb8                s3eBASS_FXGetParameters
-                0x000022dc                s3eBASS_SampleGetChannels
-                0x00001fa0                s3eBASS_ChannelSetPosition
-                0x00002110                s3eBASS_ChannelIsActive
-                0x00002250                s3eBASS_StreamCreateFileUser
-                0x0000254c                s3eBASS_GetConfigPtr
-                0x00001f38                s3eBASS_ChannelRemoveSync
-                0x000023ac                s3eBASS_MusicLoad
-                0x0000251c                s3eBASS_GetDeviceInfo
-                0x00001ea8                s3eBASS_FXReset
-                0x000024ec                s3eBASS_SetDevice
-                0x00001f90                s3eBASS_ChannelGetPosition
-                0x00002120                s3eBASS_ChannelSetDevice
-                0x00002050                s3eBASS_ChannelIsSliding
-                0x000022ac                s3eBASS_StreamCreate
-                0x000024ac                s3eBASS_Update
-                0x0000244c                s3eBASS_GetVolume
-                0x00001f70                s3eBASS_ChannelGetData
-                0x000020d0                s3eBASS_ChannelUpdate
-                0x000023dc                s3eBASS_Get3DPosition
-                0x00002100                s3eBASS_ChannelGetInfo
-                0x0000253c                s3eBASS_GetVersion
-                0x000023ec                s3eBASS_Set3DPosition
-                0x00001fc0                s3eBASS_ChannelGetLength
-                0x000024dc                s3eBASS_GetDevice
-                0x000022fc                s3eBASS_SampleSetInfo
-                0x00001ea4                s3eBASS_Apply3D
-                0x00001e98                _Z11s3eBassInitv
-                0x00001f08                s3eBASS_ChannelSetLink
-                0x0000234c                s3eBASS_SampleCreate
-                0x00001ea0                _Z16s3eBassTerminatev
-                0x000021a0                s3eBASS_RecordGetInputName
-                0x0000247c                s3eBASS_Stop
-                0x00001f48                s3eBASS_ChannelSetSync
-                0x00002090                s3eBASS_ChannelPause
-                0x00002140                s3eBASS_ChannelSeconds2Bytes
-                0x000020a0                s3eBASS_ChannelStop
-                0x0000239c                s3eBASS_MusicFree
-                0x0000245c                s3eBASS_SetVolume
-                0x000021f0                s3eBASS_RecordInit
-                0x000020f0                s3eBASS_ChannelGetTags
-                0x0000246c                s3eBASS_Pause
-                0x00001fe0                s3eBASS_ChannelSet3DPosition
-                0x00002150                s3eBASS_ChannelBytes2Seconds
-                0x00002080                s3eBASS_ChannelSetAttribute
-                0x000021b0                s3eBASS_RecordGetInfo
-                0x000022cc                s3eBASS_SampleStop
-                0x0000241c                s3eBASS_PluginGetInfo
-                0x00002280                s3eBASS_StreamCreateFile
-                0x00001ed8                s3eBASS_ChannelRemoveFX
-                0x00002210                s3eBASS_StreamPutFileData
-                0x00002260                s3eBASS_StreamCreateURL
-                0x00002060                s3eBASS_ChannelSlideAttribute
-                0x00002240                s3eBASS_StreamFree
-                0x00001f80                s3eBASS_ChannelGetLevel
-                0x00002180                s3eBASS_RecordGetInput
-                0x0000236c                s3eBASS_SampleLoad
-                0x00001ec8                s3eBASS_FXSetParameters
-                0x000024cc                s3eBASS_Free
-                0x000021e0                s3eBASS_RecordSetDevice
-                0x00002200                s3eBASS_RecordGetDeviceInfo
-                0x00002070                s3eBASS_ChannelGetAttribute
-                0x0000242c                s3eBASS_PluginFree
-                0x00002130                s3eBASS_ChannelGetDevice
-                0x0000248c                s3eBASS_Start
-                0x0000232c                s3eBASS_SampleSetData
-                0x0000240c                s3eBASS_Set3DFactors
-                0x00002020                s3eBASS_ChannelSet3DAttributes
-                0x00002230                s3eBASS_StreamGetFilePosition
-                0x00002190                s3eBASS_RecordSetInput
-                0x000021c0                s3eBASS_RecordFree
-                0x00001ef8                s3eBASS_ChannelRemoveLink
-                0x0000230c                s3eBASS_SampleGetInfo
-                0x00002220                s3eBASS_StreamPutData
-                0x0000233c                s3eBASS_SampleFree
-                0x000020b0                s3eBASS_ChannelPlay
-                0x0000256c                s3eBASS_GetConfig
-                0x0000249c                s3eBASS_GetCPU
-                0x00002160                s3eBASS_RecordStart
-                0x000024fc                s3eBASS_Init
-                0x0000243c                s3eBASS_PluginLoad
-                0x000021d0                s3eBASS_RecordGetDevice
- .text          0x0000258c      0xe08 release/s3eBass_register.os
-                0x0000258c                _Z18s3eBassRegisterExtv
-                0x00002c90                RegisterExt
- .text          0x00003394        0x0 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtend_so.o
+ .text          0x00001e84       0x14 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+                0x00001e84                atexit
+ .text.exit     0x00001e98       0x10 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+                0x00001e98                __on_dlclose
+ .text          0x00001ea8      0x184 release/s3eBass.os
+                0x00001ed8                s3eBASS_ChannelSetDSP
+                0x00001ef8                s3eBASS_ChannelGet3DPosition
+                0x00002028                s3eBASS_SetConfig
+                0x00001ec8                s3eBASS_ChannelSetFX
+                0x00001ffc                s3eBASS_GetInfo
+                0x00001f2c                s3eBASS_ChannelFlags
+                0x00002014                s3eBASS_ErrorGetCode
+                0x00002020                s3eBASS_SetConfigPtr
+                0x00001ed4                s3eBASS_ChannelRemoveDSP
+                0x00001f00                s3eBASS_ChannelGet3DAttributes
+                0x00001fa8                s3eBASS_SampleGetData
+                0x00001f9c                s3eBASS_SampleGetChannel
+                0x00001fcc                s3eBASS_Get3DFactors
+                0x00001f24                s3eBASS_ChannelLock
+                0x00001ebc                s3eBASS_FXGetParameters
+                0x00001f98                s3eBASS_SampleGetChannels
+                0x00001ef0                s3eBASS_ChannelSetPosition
+                0x00001f38                s3eBASS_ChannelIsActive
+                0x00001f84                s3eBASS_StreamCreateFileUser
+                0x0000201c                s3eBASS_GetConfigPtr
+                0x00001edc                s3eBASS_ChannelRemoveSync
+                0x00001fc0                s3eBASS_MusicLoad
+                0x00002010                s3eBASS_GetDeviceInfo
+                0x00001eb8                s3eBASS_FXReset
+                0x00002008                s3eBASS_SetDevice
+                0x00001eec                s3eBASS_ChannelGetPosition
+                0x00001f3c                s3eBASS_ChannelSetDevice
+                0x00001f08                s3eBASS_ChannelIsSliding
+                0x00001f90                s3eBASS_StreamCreate
+                0x00001ff8                s3eBASS_Update
+                0x00001fe0                s3eBASS_GetVolume
+                0x00001ee4                s3eBASS_ChannelGetData
+                0x00001f28                s3eBASS_ChannelUpdate
+                0x00001fc4                s3eBASS_Get3DPosition
+                0x00001f34                s3eBASS_ChannelGetInfo
+                0x00002018                s3eBASS_GetVersion
+                0x00001fc8                s3eBASS_Set3DPosition
+                0x00001ef4                s3eBASS_ChannelGetLength
+                0x00002004                s3eBASS_GetDevice
+                0x00001fa0                s3eBASS_SampleSetInfo
+                0x00001eb4                s3eBASS_Apply3D
+                0x00001ea8                _Z11s3eBassInitv
+                0x00001ed0                s3eBASS_ChannelSetLink
+                0x00001fb4                s3eBASS_SampleCreate
+                0x00001eb0                _Z16s3eBassTerminatev
+                0x00001f58                s3eBASS_RecordGetInputName
+                0x00001fec                s3eBASS_Stop
+                0x00001ee0                s3eBASS_ChannelSetSync
+                0x00001f18                s3eBASS_ChannelPause
+                0x00001f44                s3eBASS_ChannelSeconds2Bytes
+                0x00001f1c                s3eBASS_ChannelStop
+                0x00001fbc                s3eBASS_MusicFree
+                0x00001fe4                s3eBASS_SetVolume
+                0x00001f6c                s3eBASS_RecordInit
+                0x00001f30                s3eBASS_ChannelGetTags
+                0x00001fe8                s3eBASS_Pause
+                0x00001efc                s3eBASS_ChannelSet3DPosition
+                0x00001f48                s3eBASS_ChannelBytes2Seconds
+                0x00001f14                s3eBASS_ChannelSetAttribute
+                0x00001f5c                s3eBASS_RecordGetInfo
+                0x00001f94                s3eBASS_SampleStop
+                0x00001fd4                s3eBASS_PluginGetInfo
+                0x00001f8c                s3eBASS_StreamCreateFile
+                0x00001ec4                s3eBASS_ChannelRemoveFX
+                0x00001f74                s3eBASS_StreamPutFileData
+                0x00001f88                s3eBASS_StreamCreateURL
+                0x00001f0c                s3eBASS_ChannelSlideAttribute
+                0x00001f80                s3eBASS_StreamFree
+                0x00001ee8                s3eBASS_ChannelGetLevel
+                0x00001f50                s3eBASS_RecordGetInput
+                0x00001fb8                s3eBASS_SampleLoad
+                0x00001ec0                s3eBASS_FXSetParameters
+                0x00002000                s3eBASS_Free
+                0x00001f68                s3eBASS_RecordSetDevice
+                0x00001f70                s3eBASS_RecordGetDeviceInfo
+                0x00001f10                s3eBASS_ChannelGetAttribute
+                0x00001fd8                s3eBASS_PluginFree
+                0x00001f40                s3eBASS_ChannelGetDevice
+                0x00001ff0                s3eBASS_Start
+                0x00001fac                s3eBASS_SampleSetData
+                0x00001fd0                s3eBASS_Set3DFactors
+                0x00001f04                s3eBASS_ChannelSet3DAttributes
+                0x00001f7c                s3eBASS_StreamGetFilePosition
+                0x00001f54                s3eBASS_RecordSetInput
+                0x00001f60                s3eBASS_RecordFree
+                0x00001ecc                s3eBASS_ChannelRemoveLink
+                0x00001fa4                s3eBASS_SampleGetInfo
+                0x00001f78                s3eBASS_StreamPutData
+                0x00001fb0                s3eBASS_SampleFree
+                0x00001f20                s3eBASS_ChannelPlay
+                0x00002024                s3eBASS_GetConfig
+                0x00001ff4                s3eBASS_GetCPU
+                0x00001f4c                s3eBASS_RecordStart
+                0x0000200c                s3eBASS_Init
+                0x00001fdc                s3eBASS_PluginLoad
+                0x00001f64                s3eBASS_RecordGetDevice
+ .text          0x0000202c     0x251c release/s3eBass_register.os
+                0x0000202c                _Z18s3eBassRegisterExtv
+                0x000039c4                RegisterExt
+ .text          0x00004548        0x0 /Developer/Marmalade/6.2/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+ .text.s3eEdkThreadRunOnOSAsync
+                0x00004548       0x30 /Developer/Marmalade/6.2/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+                0x00004548                s3eEdkThreadRunOnOSAsync
+ .text.s3eEdkThreadRunOnOS
+                0x00004578       0x30 /Developer/Marmalade/6.2/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+                0x00004578                s3eEdkThreadRunOnOS
+ .text.s3eEdkErrorSetString
+                0x000045a8       0x30 /Developer/Marmalade/6.2/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+                0x000045a8                s3eEdkErrorSetString
+ .text          0x000045d8        0x0 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtend_so.o
  *(.gnu.warning)
  *(.glue_7t)
  .glue_7t       0x00000000        0x0 linker stubs
@@ -231,27 +247,25 @@ LOAD /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crte
 
 .fini
  *(.fini)
-                0x00003394                PROVIDE (__etext, .)
-                0x00003394                PROVIDE (_etext, .)
-                0x00003394                PROVIDE (etext, .)
+                0x000045d8                PROVIDE (__etext, .)
+                0x000045d8                PROVIDE (_etext, .)
+                0x000045d8                PROVIDE (etext, .)
 
-.rodata         0x00003394        0x8
+.rodata         0x000045d8        0x8
  *(.rodata .rodata.* .gnu.linkonce.r.*)
  .rodata.str1.4
-                0x00003394        0x8 release/s3eBass_register.os
+                0x000045d8        0x8 release/s3eBass_register.os
 
 .rodata1
  *(.rodata1)
 
-.ARM.extab      0x0000339c        0x0
+.ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
- .ARM.extab     0x0000339c        0x0 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
-                0x0000339c                __exidx_start = .
+                0x000045e0                __exidx_start = .
 
-.ARM.exidx      0x0000339c        0x8
+.ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
- .ARM.exidx     0x0000339c        0x8 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
-                0x000033a4                __exidx_end = .
+                0x000045e0                __exidx_end = .
 
 .eh_frame_hdr
  *(.eh_frame_hdr)
@@ -261,8 +275,8 @@ LOAD /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crte
 
 .gcc_except_table
  *(.gcc_except_table .gcc_except_table.*)
-                0x000033a4                . = (ALIGN (0x1000) - ((0x1000 - .) & 0xfff))
-                0x00004bd4                . = (0x1000 DATA_SEGMENT_ALIGN 0x1000)
+                0x000045e0                . = (ALIGN (0x1000) - ((0x1000 - .) & 0xfff))
+                0x00005bd8                . = (0x1000 DATA_SEGMENT_ALIGN 0x1000)
 
 .eh_frame
  *(.eh_frame)
@@ -280,18 +294,15 @@ LOAD /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crte
 .preinit_array
  *(.preinit_array)
 
-.init_array     0x00004bd4        0x8
+.init_array     0x00005bd8        0x4
  *(SORT(.init_array.*))
  *(.init_array)
- .init_array    0x00004bd4        0x4 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
-                0x00004bd4                __INIT_ARRAY__
- .init_array    0x00004bd8        0x4 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtend_so.o
+ .init_array    0x00005bd8        0x4 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtend_so.o
 
-.fini_array     0x00004bdc        0xc
+.fini_array     0x00005bdc        0x8
  *(.fini_array)
- .fini_array    0x00004bdc        0x8 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
-                0x00004bdc                __FINI_ARRAY__
- .fini_array    0x00004be4        0x4 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtend_so.o
+ .fini_array    0x00005bdc        0x4 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+ .fini_array    0x00005be0        0x4 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtend_so.o
  *(SORT(.fini_array.*))
 
 .ctors
@@ -315,53 +326,55 @@ LOAD /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crte
  *(.data.rel.ro.local* .gnu.linkonce.d.rel.ro.local.*)
  *(.data.rel.ro* .gnu.linkonce.d.rel.ro.*)
 
-.dynamic        0x00004be8      0x108
+.dynamic        0x00005be4      0x100
  *(.dynamic)
- .dynamic       0x00004be8      0x108 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
-                0x00004be8                _DYNAMIC
+ .dynamic       0x00005be4      0x100 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+                0x00005be4                _DYNAMIC
 
-.got            0x00004cf0      0x310
+.got            0x00005ce4      0x31c
  *(.got.plt)
- .got.plt       0x00004cf0      0x190 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
-                0x00004cf0                _GLOBAL_OFFSET_TABLE_
+ .got.plt       0x00005ce4      0x19c /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+                0x00005ce4                _GLOBAL_OFFSET_TABLE_
  *(.got)
- .got           0x00004e80      0x180 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
-                0x00005000                . = (. DATA_SEGMENT_RELRO_END 0x0)
+ .got           0x00005e80      0x180 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+                0x00006000                . = (. DATA_SEGMENT_RELRO_END 0x0)
 
-.data           0x00005000       0x10
-                0x00005000                __data_start = .
+.data           0x00006000        0x4
+                0x00006000                __data_start = .
  *(.data .data.* .gnu.linkonce.d.*)
- .data          0x00005000       0x10 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
-                0x00005000                __dso_handle
- .data          0x00005010        0x0 release/s3eBass.os
- .data          0x00005010        0x0 release/s3eBass_register.os
- .data          0x00005010        0x0 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtend_so.o
+ .data          0x00006000        0x4 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+                0x00006000                __dso_handle
+ .data          0x00006004        0x0 release/s3eBass.os
+ .data          0x00006004        0x0 release/s3eBass_register.os
+ .data          0x00006004        0x0 /Developer/Marmalade/6.2/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+ .data          0x00006004        0x0 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtend_so.o
 
 .data1
  *(.data1)
-                0x00005010                _edata = .
-                0x00005010                PROVIDE (edata, .)
-                0x00005010                __bss_start = .
-                0x00005010                __bss_start__ = .
+                0x00006004                _edata = .
+                0x00006004                PROVIDE (edata, .)
+                0x00006004                __bss_start = .
+                0x00006004                __bss_start__ = .
 
-.bss            0x00005010        0x0
+.bss            0x00006004        0x0
  *(.dynbss)
- .dynbss        0x00000000        0x0 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+ .dynbss        0x00000000        0x0 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
  *(.bss .bss.* .gnu.linkonce.b.*)
- .bss           0x00005010        0x0 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
- .bss           0x00005010        0x0 release/s3eBass.os
- .bss           0x00005010        0x0 release/s3eBass_register.os
- .bss           0x00005010        0x0 /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtend_so.o
+ .bss           0x00006004        0x0 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+ .bss           0x00006004        0x0 release/s3eBass.os
+ .bss           0x00006004        0x0 release/s3eBass_register.os
+ .bss           0x00006004        0x0 /Developer/Marmalade/6.2/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+ .bss           0x00006004        0x0 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtend_so.o
  *(COMMON)
-                0x00005010                . = ALIGN ((. != 0x0)?0x4:0x1)
-                0x00005010                _bss_end__ = .
-                0x00005010                __bss_end__ = .
-                0x00005010                . = ALIGN (0x4)
-                0x00005010                . = ALIGN (0x4)
-                0x00005010                __end__ = .
-                0x00005010                _end = .
-                0x00005010                PROVIDE (end, .)
-                0x00005010                . = DATA_SEGMENT_END (.)
+                0x00006004                . = ALIGN ((. != 0x0)?0x4:0x1)
+                0x00006004                _bss_end__ = .
+                0x00006004                __bss_end__ = .
+                0x00006004                . = ALIGN (0x4)
+                0x00006004                . = ALIGN (0x4)
+                0x00006004                __end__ = .
+                0x00006004                _end = .
+                0x00006004                PROVIDE (end, .)
+                0x00006004                . = DATA_SEGMENT_END (.)
 
 .stab
  *(.stab)
@@ -381,10 +394,13 @@ LOAD /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crte
 .stab.indexstr
  *(.stab.indexstr)
 
-.comment        0x00000000       0x24
+.comment        0x00000000       0x5b
  *(.comment)
- .comment       0x00000000       0x12 release/s3eBass.os
- .comment       0x00000012       0x12 release/s3eBass_register.os
+ .comment       0x00000000       0x25 /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+                                 0x26 (size before relaxing)
+ .comment       0x00000025       0x12 release/s3eBass.os
+ .comment       0x00000037       0x12 release/s3eBass_register.os
+ .comment       0x00000049       0x12 /Developer/Marmalade/6.2/s3e/edk/lib/android/libedk.a(edk_helpers.o)
 
 .debug
  *(.debug)
@@ -452,15 +468,17 @@ LOAD /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crte
 /DISCARD/
  *(.note.GNU-stack)
  *(.gnu_debuglink)
-OUTPUT(/Users/yjpark/pettyfun/libs/s3eBass/lib/android/libs3eBass.so elf32-littlearm)
+OUTPUT(/Users/yjpark/pettyfun/libs/PfAudio/s3eBass/lib/android/libs3eBass.so elf32-littlearm)
 
 .ARM.attributes
-                0x00000000       0x2f
+                0x00000000       0x31
  .ARM.attributes
-                0x00000000       0x2d /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
+                0x00000000       0x2d /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtbegin_so.o
  .ARM.attributes
-                0x0000002d       0x28 release/s3eBass.os
+                0x0000002d       0x2b release/s3eBass.os
  .ARM.attributes
-                0x00000055       0x28 release/s3eBass_register.os
+                0x00000058       0x2d release/s3eBass_register.os
  .ARM.attributes
-                0x0000007d       0x1f /Users/yjpark/App/android-ndk-r8b/platforms/android-9/arch-arm/usr/lib/crtend_so.o
+                0x00000085       0x2b /Developer/Marmalade/6.2/s3e/edk/lib/android/libedk.a(edk_helpers.o)
+ .ARM.attributes
+                0x000000b0       0x1f /Users/yjpark/App/android-ndk-r8d/platforms/android-9/arch-arm/usr/lib/crtend_so.o

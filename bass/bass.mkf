@@ -9,7 +9,7 @@
 # Running the extension builder with --platform can cause additions to this file
 # even after modification, to support additional platforms
 
-display_name "bass"
+display_name "Extensions/bass"
 
 includepath
 {
@@ -31,6 +31,7 @@ deployments
 
 deployments
 {
+    iphone-link-opts="-weak_framework Accelerate"
     iphone-link-lib="bass" #quotes and space are needed here to separate appended options
     iphone-link-libdir=iphone
 }

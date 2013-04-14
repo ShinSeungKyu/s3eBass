@@ -1,7 +1,7 @@
 #!/usr/bin/env mkb
 options
 {
-    module_path="../PfGame"
+    module_path="../../PfGame"
     module_path="../s3eBass"
 }
 

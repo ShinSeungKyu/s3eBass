@@ -73,24 +73,24 @@ void play(const char* path)
 		pos=s3eBASS_ChannelGetPosition(chan,BASS_POS_BYTE);
 		time=s3eBASS_ChannelBytes2Seconds(chan,pos);
 #ifdef _WIN32
-		printf("pos %09I64u",pos);
+		//printf("pos %09I64u",pos);
 #else
-		printf("pos %09llu",pos);
+		//printf("pos %09llu",pos);
 #endif
 		if (ismod) {
 			pos=s3eBASS_ChannelGetPosition(chan,BASS_POS_MUSIC_ORDER);
-			printf(" (%03u:%03u)",LOWORD(pos),HIWORD(pos));
+			//printf(" (%03u:%03u)",LOWORD(pos),HIWORD(pos));
 		}
-		printf(" - %u:%02u - L ",time/60,time%60);
+		//printf(" - %u:%02u - L ",time/60,time%60);
 		if (act==BASS_ACTIVE_STALLED) { // playback has stalled
-			printf("-- buffering : %05u --",(DWORD)s3eBASS_StreamGetFilePosition(chan,BASS_FILEPOS_BUFFER));
+			//printf("-- buffering : %05u --",(DWORD)s3eBASS_StreamGetFilePosition(chan,BASS_FILEPOS_BUFFER));
 		} else {
-			for (a=27204;a>200;a=a*2/3) putchar(LOWORD(level)>=a?'*':'-');
-			putchar(' ');
-			for (a=210;a<32768;a=a*3/2) putchar(HIWORD(level)>=a?'*':'-');
+			//for (a=27204;a>200;a=a*2/3) putchar(LOWORD(level)>=a?'*':'-');
+			//putchar(' ');
+			//for (a=210;a<32768;a=a*3/2) putchar(HIWORD(level)>=a?'*':'-');
 		}
-		printf(" R - cpu %.2f%%  \r",s3eBASS_GetCPU());
-		fflush(stdout);
+		//printf(" R - cpu %.2f%%  \r",s3eBASS_GetCPU());
+		//fflush(stdout);
 	}
 	printf("                                                                             \r");
     
@@ -119,10 +119,24 @@ int main() {
     }
     s3eBASS_Start();
     
+    //GAME->LoadAllScenes();
+    //GAME->SwitchToLastScene();
+    
+    /*
+     HSTREAM sound = BASS_StreamCreateFile(FALSE, "/Users/yjpark/pettyfun/libs/PfEditor/data/audio/shoot.wav", 0, 0, BASS_SAMPLE_LOOP);
+     if (sound != 0) {
+     BASS_ChannelPlay(sound, true);
+     }
+     */
+    //play("/Users/yjpark/pettyfun/libs/TestBass/data/audio/jammin_jagger.mod");
+    
     if (true) {
-        s3eFileGetFileString("audio/theday.xm", S3E_FILE_REAL_PATH, buffer, 1000);
-        PfTrace("The real path is: %s", buffer);
-        play(buffer);
+        if (s3eFileGetFileString("rom://audio/theday.xm", S3E_FILE_REAL_PATH, buffer, 1000) == NULL) {
+            printf("ERROR getting realpath: %d, %s", s3eFileGetError(), s3eFileGetErrorString());
+        }
+        printf("AAAAA rom://audio/theday.xm -> %s\n", buffer);
+        //play(buffer);
+        play("file:///android_asset/audio/theday.xm");
     } else {
         //android's get file string is not working now, using abs path for testing for now.
         play("/sdcard/temp/theday.xm");

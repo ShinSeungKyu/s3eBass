@@ -6,7 +6,7 @@
 #define _GAME_H_
 
 #include "misc/PfMacro.h"
-#include "misc/PfGame.h"
+#include "game/PfGame.h"
 
 #define	GAME Game::getInstance()
 

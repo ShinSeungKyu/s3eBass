@@ -1,0 +1,38 @@
+#!/usr/bin/env mkb
+
+display_name "PfAudio"
+
+options
+{
+    module_path="../s3eBass"
+}
+
+subprojects
+{
+    s3eBass
+    jsoncpp
+}
+
+includepath
+{
+    source
+}
+
+files
+{
+    [source]
+    (source)
+    PfAudioUtils.cpp
+    PfAudioUtils.h
+    PfAudio.cpp
+    PfAudio.h
+    PfChannel.cpp
+    PfChannel.h
+    PfSample.cpp
+    PfSample.h
+    PfMusic.cpp
+    PfMusic.h
+    PfStream.cpp
+    PfStream.h
+}
+
